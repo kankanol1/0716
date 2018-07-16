@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>start</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            position: relative;
+            top: 100px;
+            height: 200px;
+            width: 1200px;
+            overflow: hidden;
+            margin: 50px auto;
+        }
+        #b-img{
+            height: 200px;
+            width: 1500px;
+            position: relative;
+        }
+        #b-img img{
+            height: 200px;
+            width: 300px;
+            margin-right: -4px;
+            border: 0;
+        }
+
+        #b-div{
+            position: relative;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 10px;
+            height: 10px;
+            width: 120px;
+        }
+        #b-div div{
+            top: 0px;
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background-color: #27fff9;
+            float: left;
+            position: relative;
+            margin: 0 10px;
+        }
+        #b-lr{
+            position: relative;
+            width: 300px;
+            height: 20px;
+            line-height: 20px;
+            top: -130px;
+        }
+        #b-lr div{
+            line-height: 40px;
+            height: 40px;
+            width: 20px;
+            background-color: white;
+            opacity: 0;
+            text-align: center;
+            vertical-align: middle;
+
+        }
+        #b-lr .left{
+            float: left;
+            padding-right: 5px;
+            /*border-radius:0 50% 50% 0;*/
+            position: relative;
+            left: -5px;
+        }
+        #b-lr .left:hover{
+            cursor: pointer;
+
+        }
+        #b-lr .right{
+            position: relative;
+            float:right;
+            padding-left: 5px;
+            /*border-radius: 50% 0 0 50%;*/
+            right: -5px;
+        }
+        #b-lr .right:hover{
+            cursor: pointer;
+        }
+
+
+    </style>
+    <script>
+        window.onload = function(){
+            var oBox = document.querySelector("#box");
+            var oImg = document.querySelector("#b-img");
+            var oImgS = document.querySelectorAll("img");
+            var oBtn = document.querySelectorAll(".btn");
+            var oDiv = document.querySelector("#b-div");
+            var timer = setInterval(move,2000);
+            var oLeft = document.querySelector(".left");
+            var oRight = document.querySelector(".right");
+            var  obj = oBtn[0];
+            var oLr = document.querySelector("#b-lr");
+            obj.style.background = "pink";
+            oImg.style.left = "0px";
+            //按钮点击事件
+            for(var i=0;i<oBtn.length;i++){
+                oBtn[i].index = i;
+                oBtn[i].onclick= function(){
+                    if(obj) obj.style.background = "";
+                    oImg.style.left = - this.index * 300 +"px";
+                    oImg.style.transition = "1s";
+                    this.style.background = "pink";
+                    obj = this;
+                };
+            }
+            //左右单击事件
+            oLeft.onclick = function(){
+                //console.log(parseInt(oImg.style.left));
+                if(parseInt(oImg.style.left) > -1200){
+                    oImg.style.left = parseInt(oImg.style.left) - 300 + "px";
+                    oImg.style.transition = "1s";
+                    //console.log(3);
+                } else {
+
+                    //if(parseInt(oImg.style.left) <= -1200){
+                    oImg.style.left = "0px";
+                    oImg.style.transition = "0s";
+                    //console.log( oImg.style.left);
+                    //}
+                    //oImg.style.left = parseInt(oImg.style.left) - 300 + "px";
+                    //oImg.style.transition = "1s";
+                    //console.log(4);
+                }
+                //console.log( oImg.style.left);
+                //oImg.style.left = parseInt(oImg.style.left) - 300 + "px";
+                //oImg.style.transition = "1s";
+            };
+            oRight.onclick = function(){
+                if(parseInt(oImg.style.left)<0){
+                    console.log(2);
+                    oImg.style.left = parseInt(oImg.style.left) + 300 + "px";
+                    oImg.style.transition = "1s";
+                }else{
+                    oImg.style.left ="-1200px";
+                    oImg.style.transition = "0s";
+                }
+                // timer=setInterval(move,2000);
+            };
+            //下面鼠标事件
+            oDiv.onmouseover = function(){
+                clearInterval(timer);
+            };
+            oDiv.onmouseout = function(){
+                timer=setInterval(move,2000);
+            };
+            //大盒子事件
+            oBox.onmouseover = function(){
+                //obj.style.background = "pink";
+                oLeft.style.opacity = "0.7";
+                oRight.style.opacity = "0.7";
+            };
+            oBox.onouseout = function(){
+                for(var i=0;i<oBtn.length;i++){
+                    //oBtn[i].style.background = "";
+                }
+                oLeft.style.opacity = "0";
+                oRight.style.opacity = "0";
+            };
+            //图片事件
+            oImg.onmouseover = function(){
+                clearInterval(timer);
+            };
+            oImg.onmouseout = function(){
+                timer=setInterval(move,2000);
+            };
+            //左右按钮
+            oLr.onmouseover = function(){
+                clearInterval(timer);
+            };
+            oLr.onmouseout = function(){
+                timer=setInterval(move,2000);
+            };
+            //move()函数
+            function move(){
+
+                for(var i=0;i<oBtn.length;i++){
+                    oBtn[i].style.background = "";
+                }
+                obj.style.background = "pink";
+                if(parseInt(oImg.style.left)>-1200){
+
+                    oImg.style.left = parseInt(oImg.style.left) -300 + "px";
+                    if(-parseInt(oImg.style.left) / 300 < 4){
+                        obj.style.background = "";
+                        oBtn[-parseInt(oImg.style.left) / 300].style.background = "pink";
+                    } else {
+                        oBtn[0].style.background = "pink";
+                    }
+                    oImg.style.transition = "1s";
+                    if(parseInt(oImg.style.left)<= -1200){
+                        setTimeout(function(){
+                            oImg.style.left =  "0px";
+                            oImg.style.transition = "0s";
+                        },1000)
+
+                    }
+                }else{
+                    oImg.style.left = "0px";
+                    oImg.style.transition = "0s";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <div id="b-img">
+        <img src="img/01.jpg" alt="">
+        <img src="img/02.jpg" alt="">
+        <img src="img/03.jpg" alt="">
+        <img src="img/04.jpg" alt="">
+        <!--  最后追加第一张图片为了循环到最后连接平滑 -->
+        <img src="img/01.jpg" alt="">
+    </div>
+    <div id="b-div">
+        <!--date 自定义属性 也可以在js中循环的过程中动态添加索引-->
+        <div class="btn" data-index="0"></div>
+        <div class="btn" data-index="1"></div>
+        <div class="btn" data-index="2"></div>
+        <div class="btn" data-index="3"></div>
+    </div>
+    <div id="b-lr">
+        <div class="left">〈</div>
+        <div class="right">〉</div>
+    </div>
+</div>
+<script>
+</script>
+</body>
+</html>

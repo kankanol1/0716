@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #drawing{
+            display: block;
+            /*border: 1px solid red;*/
+        }
+    </style>
+</head>
+<body style="height: 2000px">
+<canvas id="drawing" >A drawing of something.</canvas>
+
+
+
+<script>
+
+    var drawing = document.getElementById("drawing");
+    // var content = drawing.getContext("2d");
+    // console.log(content);
+    if(drawing.getContext){
+
+
+       /* //显示图像
+        var imgURL = drawing.toDataURL("05.jpg");
+        var image = document.createElement("img");
+        image.src = imgURL;
+        // image.src = "01.png";
+        document.body.appendChild(image);*/
+
+
+        var content = drawing.getContext("2d");
+
+
+        //填充
+        /*content.fillStyle = "#f00";
+        content.fillRect(10,10,50,25);
+        content.clearRect(200,100,50,25);
+        content.fillStyle = "rgba(0,0,25,0.5)";*/
+
+
+        //描边
+        /*content.strokeStyle = "#f00";
+        content.strokeRect(10,10,50,25);
+        content.strokeStyle = "#0f0";
+        content.strokeRect(30,30,50,25);*/
+
+        //清除
+        content.fillStyle = "#f00";
+        content.fillRect(10,10,50,50);
+
+        content.fillStyle = "rgba(0,0,255,0.5)";
+        content.fillRect(30,30,50,50);
+        //在两个矩形重叠的地方清除一个矩形
+        content.clearRect(40,40,10,10)
+
+
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+CSS2.1 之前是不能设置背景图大小的，
+CSS3就可以通过background-size来设定图片大小，
+可以是像素或者是百分比，如background-size:100px 200px;
+表示把背景图片大小调整为100x200px，
+目前IE只有IE9支持这个属性，
+其它主流浏览器也都支持
+
+
+
+
+
+可视区域的大小
+        document.documentElement.clientWidth
+        document.documentElement.clientHeight
+
+元素之身宽高：
+        ele.offsetWidth
+        ele.offsetHeight
+
+元素外边框到第一个可定位父级的内边框的距离
+        ele.offsetLeft
+        ele.offsetWidth
+
+addEventListener 用于向指定元素添加事件句柄
+        可以向一个元素添加多次点击事件，后一个点击事件不会覆盖前一个点击事件
+
+全局捕获：
+        标准下： return false
+        IE ：全局捕获，当一个元素设置了全局捕获，那么这个元素就会监听后续发生的所有的事情
+            一旦有事件发生，就会触发设置了全局捕获的这个对象
+        全局捕获
+            IE:      有  有效
+            FF:      有  无效
+            Chrome： 无
+
+浏览器默认事件
+        当发生一件事，浏览器默认做的事情
+        解决：那个事件触发了浏览器默认事件，那么我们就给这事件的后面添加
+               return false；
+         右键菜单事件（环境菜单）
+         oncontextmenu:右键菜单
+         oncontextmenu:右键菜单
+         oncontextmenu:右键菜单
+
+事件默认行为：
+        1、当文字被选中的时候，鼠标拖拽出现问题
+            当鼠标被按下时，如果有文字被选中，就会触发浏览器默认拖拽文字的效果
+                解决方案：
+            非标准下
+            全局捕获        setCapture
+
+onmousemove事件
+        以时间为间隔的  一旦时间过快鼠标就会脱离div 无法再被div检测到
+        解决方法 给document注册一个鼠标事件
+
+

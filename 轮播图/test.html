@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: 200px;
+            width: 298px;
+            margin: 100px auto;
+            overflow: hidden;
+            outline: none;
+        }
+        .img-g{
+            width: 1500px;
+            height: 200px;
+            position: relative;
+
+        }
+        .img-g img{
+            width: 300px;
+            height: 200px;
+            margin-right: -5px;
+        }
+
+    </style>
+    <script>
+        window.onload = function(){
+
+            var  p = document.querySelector(".img-g");
+            var  timer = setInterval(move,2000);
+
+            function move(){
+                if(parseInt(p.style.left) > -1200){
+                    p.style.left = parseInt(p.style.left) -300+"px";
+                    p.style.transition = "left 1s";
+                    if(parseInt(p.style.left) <= -1200){
+                        setTimeout(function(){
+                            p.style.left = "0px";
+                            p.style.transition = "0s";
+                        },1000)
+                    }
+                } else {
+                    p.style.left = "0px";
+                    p.style.transition = "0s";
+                }
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="img-g">
+        <img src="img/01.jpg" alt="">
+        <img src="img/02.jpg" alt="">
+        <img src="img/03.jpg" alt="">
+        <img src="img/04.jpg" alt="">
+        <img src="img/01.jpg" alt="" style="margin-right: 0">
+    </div>
+
+</div>
+</body>
+</html>

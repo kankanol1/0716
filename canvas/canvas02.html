@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        #canvas{
+        /*    width: 1000px;
+            height: 1000px;*/
+            /*background-color: #000000;*/
+            border: 1px solid red;
+            display: block;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+
+    </style>
+    <!--<script type="text/javascript" src="three.js" ></script>-->
+</head>
+<body>
+<canvas id="canvas" ></canvas>
+
+<script>
+    var drawing = document.getElementById("canvas");
+    if(drawing.getContext){
+
+        var content = drawing.getContext("2d");
+
+        //开始路径
+        content.beginPath();
+
+        //绘制外圆
+        content.arc(100,100,40,0,2 * Math.PI,false);
+
+        //绘制内圆
+        content.moveTo(194,100);
+        content.arc(100,100,19,0,2 * Math.PI,false);
+
+        //绘制分针
+        content.moveTo(100,100);
+        content.lineTo(100,15);
+
+        //绘制时针
+        content.moveTo(100,100);
+         content.lineTo(35,100);
+
+        //描边路径
+        content.stroke();
+
+    }
+</script>
+
+<!--
+
+首先必须调用beginPath()方法，表示要开始绘制的路径。再通过下面的方法绘制实际路径
+
+    arc(x,y,radius,starAngle,endAngle,counterclockwise)
+            以（x,y）为圆心绘制一条弧线，弧线半径为radius 起始和结束角度，
+            最后一个参数表示是否按逆时针方向计算，false 表示顺时针
+    bezierCurveTo(c1x,c1y,c2x,c2y,x,y):
+            从上一点开始绘制一条曲线，到（x,y）为止，并且以（c1x,c1y）和(c2x.c2y)为控制点
+    lineTo(x,y)
+            从上一点开始绘制一条直线，到（x,y）w为止，
+    moveTo(x,y)
+            将绘制游标移动到（x,y）,不画线
+    quadraticCurveTo(cx,cy,x,y)
+            从上一点开始绘制一条而二次曲线，到（x,y）为止，并且以（cx,cy）为控制点。
+    rect(x,y,width,height)
+            c从点（x,y）开始绘制一个矩形，宽度和高度分别由width和height指定，
+            这个方法绘制的是矩形路径，而不是strokeRect（）和fillRect（）所绘制的独特的形状
+
+-->
+
+</body>
+</html>

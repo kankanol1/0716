@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生就是轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: 200px;
+            width: 298px;
+            margin: 100px auto;
+            overflow: hidden;
+            outline: none;
+        }
+        .img-g{
+            width: 1500px;
+            height: 200px;
+            position: relative;
+        }
+        .img-g img{
+            width: 300px;
+            height: 200px;
+            margin-right: -5px;
+        }
+        .button-g{
+            position: relative;
+            top: -40px;
+            text-align: center;
+        }
+        .button-g span{
+            display:inline-block;
+            position:relative;
+            z-index:10;
+            width:10px;
+            height:10px;
+            margin:0 5px;
+            border-radius:50%;
+            background-color: #b0ffef;
+        }
+        .button-p{
+            position: relative;
+            top: -142px;
+            text-align: center;
+
+        }
+        .button-p a{
+            text-decoration: none;
+            color: #000;
+            height: 25px;
+            width: 15px;
+            line-height: 25px;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var  oBox = document.getElementsByClassName(".box");
+
+            var  p = document.querySelector(".img-g");
+            //console.log(parseInt(p.style.left));
+            var button = document.querySelector(".button-g").children;
+            var aA = document.querySelectorAll("a");
+
+            var  timer = setInterval(move,2000);
+            //设置图片点击事件时 left 值 并添加自定义属性
+            for(let i=0;i<button.length;i++){
+                button[i].onclick = function(){
+                    p.style.left = -300*this.getAttribute('data-index')+'px';
+                    tog(this.getAttribute('data-index'));
+                }
+            }
+
+           oBox.onmouseover = function(){
+                clearInterval(timer);
+            };
+            oBox.onmouseover = function(){
+                timer = setInterval(move(),2000);
+            };
+            function tog(index){
+                if(index > 3){
+                    tog(0);
+                    return;
+                }
+                for(let i=0;i<button.length;i++){
+                    button[i].style.background = "#b0ffef";
+                }
+                button[index].style.background ="#ffc5de";
+            }
+            p.onmouseover=function(){
+
+                clearInterval(timer);
+            }
+            p.onmouseout=function(){
+                timer=setInterval(move,3000);
+            }
+
+            function move(){
+                if(parseInt(p.style.left) > -1200){
+                    p.style.left = parseInt(p.style.left) -300+"px";
+                    p.style.transition = "left 1s";
+                    if(parseInt(p.style.left) <= -1200){
+                        setTimeout(function(){
+                            p.style.left = "0px";
+                            p.style.transition = "0s";
+                        },1000)
+                    }
+                } else {
+                    p.style.left = "0px";
+                    p.style.transition = "0s";
+
+                }
+            }
+           aA[0].onclick = function(){
+                p.style.left = -300*this.getAttribute('data-index')+'px';
+                tog(this.getAttribute('data-index'));
+            };
+            aA[1].onclick =function(){
+                p.style.left = 300*this.getAttribute('data-index')+'px';
+                tog(this.getAttribute('data-index'));
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="box">
+
+    <div class="img-g">
+        <img src="img/01.jpg" alt="">
+        <img src="img/02.jpg" alt="">
+        <img src="img/03.jpg" alt="">
+        <img src="img/04.jpg" alt="">
+        <img src="img/01.jpg" alt="" style="margin-right: 0">
+    </div>
+    <div class="button-g">
+
+        <span data-index="0"></span>
+        <span data-index="1"></span>
+        <span data-index="2"></span>
+        <span data-index="3"></span>
+
+    </div>
+    <div class="button-p">
+        <a  href="javascript:;" style=" vertical-align: middle;float: left;background-color: white;opacity: 0.7;padding-left: 0;"><</a>
+        <a  href="javascript:;" style=" vertical-align: middle;float: right;background-color: white;opacity: 0.7;">></a>
+    </div>
+</div>
+</body>
+</html>
